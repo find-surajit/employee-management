@@ -1,26 +1,21 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React from "react";
+import { SignIn, SignOutButton, useUser } from "@clerk/clerk-react";
 
-function App() {
+const App: React.FC = () => {
+  const { isSignedIn } = useUser();
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div style={{ textAlign: "center", marginTop: "50px" }}>
+      {!isSignedIn ? (
+        <SignIn />
+      ) : (
+        <div>
+          <h1>Welcome to Employee Management</h1>
+          <SignOutButton />
+        </div>
+      )}
     </div>
   );
-}
+};
 
 export default App;
